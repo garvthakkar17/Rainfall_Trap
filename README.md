@@ -71,6 +71,16 @@ A scheduled task to launch a webpage or command was considered but not implement
 * Use browser security features (Safe Browsing, HTTPS enforcement)
 * Security teams should monitor for abnormal user creation or installer behavior
 
+## 🎥 Proof of Concept (PoC)
+
+A full demonstration video showcasing the modified uninstaller behavior and user creation.
+
+This video walks through:
+- How the modified installer/uninstaller works.
+- The creation of a hidden admin user named `rainmeter`.
+- The potential real-world impact of compromised open-source software distribution.
+---
+https://github.com/user-attachments/assets/27b0b714-dc37-4951-9b1f-75408607afca
 
 ## 🛠️ Building Rainfall Trap Installer
 
