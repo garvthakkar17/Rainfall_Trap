@@ -1,0 +1,28 @@
+LIBRARY
+EXPORTS
+	; Note: If new functions are added, the Rainmeter.lib files in Plugins\API\{x32,x64} must be
+	; replaced by the corresponding file in {x32,x64}-Release\Obj\Library.
+	; Set '<ExcludeTests>true</ExcludeTests>' in Rainmeter.props first to minimize the .lib size.
+	RmReadString
+	RmReadFormula
+	RmReplaceVariables
+	RmPathToAbsolute
+	RmExecute
+	RmGet
+	RmLog
+	RmLogF
+	LSLog
+	ReadConfigString
+	PluginBridge
+	RmReadStringFromSection
+	RmReadFormulaFromSection
+
+	; Private
+	RainmeterMain		@1 NONAME
+
+	; 2-4 were for the non-UTF-16 pcre_ functions.
+	pcre16_compile		@5 NONAME
+	pcre16_exec			@6 NONAME
+	pcre16_study		@7 NONAME
+	
+	SkinInstallerMain	@8 NONAME

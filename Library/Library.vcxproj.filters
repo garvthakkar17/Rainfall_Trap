@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{2d6bf39d-48e1-4de3-8924-46c5666cb141}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{6570e2b7-2e40-4fba-a051-01de85760fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua\glue">
+      <UniqueIdentifier>{941dce28-a314-4492-befb-5770432c98bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NowPlaying">
+      <UniqueIdentifier>{64424fee-4da8-4109-84de-df55a55e63c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="taglib">
+      <UniqueIdentifier>{fe354ece-06ea-4af8-9129-f0fcb7e31d0c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lua\LuaScript.cpp">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\glue\LuaMeasure.cpp">
+      <Filter>Lua\glue</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\glue\LuaMeter.cpp">
+      <Filter>Lua\glue</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\glue\LuaMeterWindow.cpp">
+      <Filter>Lua\glue</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\glue\LuaGlobal.cpp">
+      <Filter>Lua\glue</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerAIMP.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerCAD.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerITunes.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerSpotify.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerWinamp.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerWLM.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\PlayerWMP.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\Cover.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\Internet.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\Lyrics.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\Player.cpp">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="NowPlaying\SDKs\iTunes\iTunesCOMInterface_i.c">
+      <Filter>NowPlaying</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandler.cpp" />
+    <ClCompile Include="ConfigParser.cpp" />
+    <ClCompile Include="ConfigParser_Test.cpp" />
+    <ClCompile Include="ContextMenu.cpp" />
+    <ClCompile Include="Dialog.cpp" />
+    <ClCompile Include="DialogAbout.cpp" />
+    <ClCompile Include="DialogInstall.cpp" />
+    <ClCompile Include="DialogManage.cpp" />
+    <ClCompile Include="DialogPackage.cpp" />
+    <ClCompile Include="Export.cpp" />
+    <ClCompile Include="GameMode.cpp" />
+    <ClCompile Include="Group.cpp" />
+    <ClCompile Include="IfActions.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Measure.cpp" />
+    <ClCompile Include="MeasureCalc.cpp" />
+    <ClCompile Include="MeasureCPU.cpp" />
+    <ClCompile Include="MeasureDiskSpace.cpp" />
+    <ClCompile Include="MeasureLoop.cpp" />
+    <ClCompile Include="MeasureMediaKey.cpp" />
+    <ClCompile Include="MeasureMemory.cpp" />
+    <ClCompile Include="MeasureNet.cpp" />
+    <ClCompile Include="MeasureNetIn.cpp" />
+    <ClCompile Include="MeasureNetOut.cpp" />
+    <ClCompile Include="MeasureNetTotal.cpp" />
+    <ClCompile Include="MeasureNowPlaying.cpp" />
+    <ClCompile Include="MeasurePhysicalMemory.cpp" />
+    <ClCompile Include="MeasurePlugin.cpp" />
+    <ClCompile Include="MeasureProcess.cpp" />
+    <ClCompile Include="MeasureRecycleManager.cpp" />
+    <ClCompile Include="MeasureRegistry.cpp" />
+    <ClCompile Include="MeasureScript.cpp" />
+    <ClCompile Include="MeasureString.cpp" />
+    <ClCompile Include="MeasureSysInfo.cpp" />
+    <ClCompile Include="MeasureTime.cpp" />
+    <ClCompile Include="MeasureUptime.cpp" />
+    <ClCompile Include="MeasureVirtualMemory.cpp" />
+    <ClCompile Include="MeasureWebParser.cpp" />
+    <ClCompile Include="MeasureWifiStatus.cpp" />
+    <ClCompile Include="Meter.cpp" />
+    <ClCompile Include="MeterBar.cpp" />
+    <ClCompile Include="MeterBitmap.cpp" />
+    <ClCompile Include="MeterButton.cpp" />
+    <ClCompile Include="MeterHistogram.cpp" />
+    <ClCompile Include="MeterImage.cpp" />
+    <ClCompile Include="MeterLine.cpp" />
+    <ClCompile Include="MeterRotator.cpp" />
+    <ClCompile Include="MeterRoundLine.cpp" />
+    <ClCompile Include="MeterShape.cpp" />
+    <ClCompile Include="MeterString.cpp" />
+    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Rainmeter.cpp" />
+    <ClCompile Include="Section.cpp" />
+    <ClCompile Include="Skin.cpp" />
+    <ClCompile Include="SkinInstaller.cpp" />
+    <ClCompile Include="SkinRegistry.cpp" />
+    <ClCompile Include="SkinRegistry_Test.cpp" />
+    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="TrayIcon.cpp" />
+    <ClCompile Include="UpdateCheck.cpp" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="lua\LuaHelper.cpp">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogNewSkin.cpp" />
+    <ClCompile Include="GeneralImage.cpp" />
+    <ClCompile Include="ImageCache.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lua\LuaScript.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\Player.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerAIMP.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerCAD.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerITunes.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerSpotify.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerWinamp.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerWLM.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\PlayerWMP.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\Cover.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\Internet.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="NowPlaying\Lyrics.h">
+      <Filter>NowPlaying</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandler.h" />
+    <ClInclude Include="ConfigParser.h" />
+    <ClInclude Include="ContextMenu.h" />
+    <ClInclude Include="Dialog.h" />
+    <ClInclude Include="DialogAbout.h" />
+    <ClInclude Include="DialogInstall.h" />
+    <ClInclude Include="DialogManage.h" />
+    <ClInclude Include="DialogPackage.h" />
+    <ClInclude Include="Export.h" />
+    <ClInclude Include="GameMode.h" />
+    <ClInclude Include="Group.h" />
+    <ClInclude Include="IfActions.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="Measure.h" />
+    <ClInclude Include="MeasureCalc.h" />
+    <ClInclude Include="MeasureCPU.h" />
+    <ClInclude Include="MeasureDiskSpace.h" />
+    <ClInclude Include="MeasureLoop.h" />
+    <ClInclude Include="MeasureMediaKey.h" />
+    <ClInclude Include="MeasureMemory.h" />
+    <ClInclude Include="MeasureNet.h" />
+    <ClInclude Include="MeasureNetIn.h" />
+    <ClInclude Include="MeasureNetOut.h" />
+    <ClInclude Include="MeasureNetTotal.h" />
+    <ClInclude Include="MeasureNowPlaying.h" />
+    <ClInclude Include="MeasurePhysicalMemory.h" />
+    <ClInclude Include="MeasurePlugin.h" />
+    <ClInclude Include="MeasureProcess.h" />
+    <ClInclude Include="MeasureRecycleManager.h" />
+    <ClInclude Include="MeasureRegistry.h" />
+    <ClInclude Include="MeasureScript.h" />
+    <ClInclude Include="MeasureString.h" />
+    <ClInclude Include="MeasureSysInfo.h" />
+    <ClInclude Include="MeasureTime.h" />
+    <ClInclude Include="MeasureUptime.h" />
+    <ClInclude Include="MeasureVirtualMemory.h" />
+    <ClInclude Include="MeasureWebParser.h" />
+    <ClInclude Include="MeasureWifiStatus.h" />
+    <ClInclude Include="Meter.h" />
+    <ClInclude Include="MeterBar.h" />
+    <ClInclude Include="MeterBitmap.h" />
+    <ClInclude Include="MeterButton.h" />
+    <ClInclude Include="MeterHistogram.h" />
+    <ClInclude Include="MeterImage.h" />
+    <ClInclude Include="MeterLine.h" />
+    <ClInclude Include="MeterRotator.h" />
+    <ClInclude Include="MeterRoundLine.h" />
+    <ClInclude Include="MeterShape.h" />
+    <ClInclude Include="MeterString.h" />
+    <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Rainmeter.h" />
+    <ClInclude Include="RainmeterQuery.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Section.h" />
+    <ClInclude Include="Skin.h" />
+    <ClInclude Include="SkinInstaller.h" />
+    <ClInclude Include="SkinRegistry.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="TrayIcon.h" />
+    <ClInclude Include="UpdateCheck.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="lua\LuaHelper.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogNewSkin.h" />
+    <ClInclude Include="GeneralImage.h" />
+    <ClInclude Include="ImageCache.h" />
+    <ClInclude Include="ImageOptions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Library.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Exports.def" />
+  </ItemGroup>
+</Project>

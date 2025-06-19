@@ -1,0 +1,256 @@
+/* Copyright (C) 2011 Rainmeter Project Developers
+ *
+ * This Source Code Form is subject to the terms of the GNU General Public
+ * License; either version 2 of the License, or (at your option) any later
+ * version. If a copy of the GPL was not distributed with this file, You can
+ * obtain one at <https://www.gnu.org/licenses/gpl-2.0.html>. */
+
+#include "StdAfx.h"
+#include "PlayerSpotify.h"
+#include "Psapi.h"
+
+Player* PlayerSpotify::c_Player = nullptr;
+
+/*
+** Constructor.
+**
+*/
+PlayerSpotify::PlayerSpotify() : Player(),
+	m_Window(nullptr),
+	m_LastCheckTime(0ULL)
+{
+}
+
+/*
+** Destructor.
+**
+*/
+PlayerSpotify::~PlayerSpotify()
+{
+	c_Player = nullptr;
+}
+
+/*
+** Creates a shared class object.
+**
+*/
+Player* PlayerSpotify::Create()
+{
+	if (!c_Player)
+	{
+		c_Player = new PlayerSpotify();
+	}
+
+	return c_Player;
+}
+
+std::wstring GetExe(HWND hwnd)
+{
+	WCHAR procPath[400] = { 0 };
+
+	DWORD procID = 0UL;
+	GetWindowThreadProcessId(hwnd, &procID);
+
+	HANDLE checkProc = OpenProcess(PROCESS_ALL_ACCESS, false, procID);
+	if (checkProc != NULL)
+	{
+		GetModuleFileNameEx(checkProc, NULL, procPath, _countof(procPath));
+		CloseHandle(checkProc);
+		if (procPath[0] != 0)
+		{
+			return PathFindFileName(procPath);
+		}
+	}
+
+	return L"";
+}
+
+/*
+** Try to find Spotify periodically.
+**
+*/
+bool PlayerSpotify::CheckWindow()
+{
+	ULONGLONG time = GetTickCount64();
+
+	// Try to find Spotify window every 5 seconds
+	if (time - m_LastCheckTime > 5000ULL)
+	{
+		m_LastCheckTime = time;
+
+		HWND prev = FindWindowEx(nullptr, nullptr, L"Chrome_WidgetWin_0", nullptr);
+
+		while (prev != nullptr && (GetWindowTextLength(prev) == 0 ||
+			_wcsicmp(GetExe(prev).c_str(), L"SPOTIFY.EXE") != 0))
+		{
+			prev = FindWindowEx(nullptr, prev, L"Chrome_WidgetWin_0", nullptr);
+		}
+		if (prev != nullptr)
+		{
+			m_Window = prev;
+			m_Initialized = true;
+		}
+	}
+	return m_Initialized;
+}
+
+/*
+** Called during each update of the main measure.
+**
+*/
+void PlayerSpotify::UpdateData()
+{
+	if (m_Initialized || CheckWindow())
+	{
+		// Parse title and artist from window title
+		WCHAR buffer[256] = { 0 };
+
+		// Check length of window text for "Spotify" and "Spotify Premium"
+		int len = GetWindowText(m_Window, buffer, _countof(buffer));
+		if (len > 7 && _wcsnicmp(buffer, L"Spotify", 7) != 0)
+		{
+			std::wstring title = buffer;
+
+			std::wstring::size_type pos = title.find(L" - ");
+			if (pos != std::wstring::npos)
+			{
+				std::wstring artist(title, 0, pos);
+				pos += 3ULL;  // Skip " - "
+				std::wstring track(title, pos);
+				m_State = STATE_PLAYING;
+
+				if (track != m_Title || artist != m_Artist)
+				{
+					m_Title = track;
+					m_Artist = artist;
+					++m_TrackCount;
+
+					if (m_Measures & MEASURE_LYRICS)
+					{
+						FindLyrics();
+					}
+				}
+				return;
+			}
+		}
+		else if (IsWindow(m_Window))
+		{
+			m_State = STATE_PAUSED;
+		}
+		else
+		{
+			ClearData();
+			m_Initialized = false;
+		}
+	}
+}
+
+/*
+** Handles the Play bang.
+**
+*/
+void PlayerSpotify::Play()
+{
+	SendMessage(m_Window, WM_APPCOMMAND, 0, SPOTIFY_PLAYPAUSE);
+}
+
+/*
+** Handles the Stop bang.
+**
+*/
+void PlayerSpotify::Stop() 
+{
+	SendMessage(m_Window, WM_APPCOMMAND, 0, SPOTIFY_STOP);
+}
+
+/*
+** Handles the Next bang.
+**
+*/
+void PlayerSpotify::Next() 
+{
+	SendMessage(m_Window, WM_APPCOMMAND, 0, SPOTIFY_NEXT);
+}
+
+/*
+** Handles the Previous bang.
+**
+*/
+void PlayerSpotify::Previous() 
+{
+	SendMessage(m_Window, WM_APPCOMMAND, 0, SPOTIFY_PREV);
+}
+
+
+/*
+** Handles the ClosePlayer bang.
+**
+*/
+void PlayerSpotify::ClosePlayer()
+{
+	// A little harsh...
+	DWORD pID = 0UL;
+	GetWindowThreadProcessId(m_Window, &pID);
+	HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pID);
+	if (hProcess)
+	{
+		TerminateProcess(hProcess, 0U);
+		CloseHandle(hProcess);
+	}
+}
+
+/*
+** Handles the OpenPlayer bang.
+**
+*/
+void PlayerSpotify::OpenPlayer(std::wstring& path)
+{
+	if (!m_Initialized)
+	{
+		if (path.empty())
+		{
+			// Gotta figure out where Winamp is located at
+			HKEY hKey;
+			RegOpenKeyEx(HKEY_CLASSES_ROOT,
+						 L"spotify\\DefaultIcon",
+						 0,
+						 KEY_QUERY_VALUE,
+						 &hKey);
+
+			DWORD size = 512UL;
+			WCHAR* data = new WCHAR[size];
+			DWORD type = 0UL;
+
+			if (RegQueryValueEx(hKey,
+								nullptr,
+								nullptr,
+								(LPDWORD)&type,
+								(LPBYTE)data,
+								(LPDWORD)&size) == ERROR_SUCCESS)
+			{
+				if (type == REG_SZ)
+				{
+					path = data;
+					path.erase(0, 1);				// Get rid of the leading quote
+					path.resize(path.length() - 3);	// And the ",0 at the end
+					ShellExecute(nullptr, L"open", path.c_str(), nullptr, nullptr, SW_SHOW);
+				}
+			}
+
+			delete [] data;
+			data = nullptr;
+			RegCloseKey(hKey);
+			hKey = nullptr;
+		}
+		else
+		{
+			ShellExecute(nullptr, L"open", path.c_str(), nullptr, nullptr, SW_SHOW);
+		}
+	}
+	else
+	{
+		// Already active, restore the window
+		ShowWindow(m_Window, SW_SHOWNORMAL);
+		BringWindowToTop(m_Window);
+	}
+}
